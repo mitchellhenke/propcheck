@@ -368,7 +368,7 @@ defmodule PropCheck do
                 unquote(prop)
               rescue
                 e in ExUnit.AssertionError ->
-                  stacktrace = System.stacktrace
+                  stacktrace = __STACKTRACE__
                   if :verbose in unquote(opts) do
                     e |> ExUnit.AssertionError.message() |> IO.write()
                     formatted = Exception.format_stacktrace(stacktrace)
@@ -376,7 +376,7 @@ defmodule PropCheck do
                   end
                   false
                 e ->
-                  stacktrace = System.stacktrace
+                  stacktrace = __STACKTRACE__
                   reraise e, stacktrace
               end
             end)
